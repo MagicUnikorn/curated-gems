@@ -427,11 +427,12 @@ function renderTags(list) {
   // 参考格式：const tagCounts = {};
   const tagCounts = {};
   list.forEach(item => {
-  const itemTags = item[tagsField] || item.tags || [];
-  itemTags.forEach(tag => {
-    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    const itemTags = item[tagsField] || item.tags || [];
+    itemTags.forEach(tag => {
+      tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    });
   });
-});  
+  
   // 添加"全部"选项
   const allText = lang === 'zh' ? '全部' : 'All';
   const tags = [allText, ...allTags];
@@ -445,8 +446,9 @@ function renderTags(list) {
     // TODO: 在这里添加标签数量显示逻辑
     const count = isAll ? list.length : (tagCounts[t] || 0);
     return `<span class="tag ${isActive ? 'active' : ''}" data-tag="${esc(tagValue)}">
-  ${esc(t)} <span class="tag-count">(${count})</span>
-</span>`;
+      ${esc(t)} <span class="tag-count">(${count})</span>
+    </span>`;
+  }).join('');
 }
 
 // 清除所有标签筛选
